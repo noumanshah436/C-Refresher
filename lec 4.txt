@@ -1,0 +1,162 @@
+      
+/*  another program showing use of scanf ( ) */
+#include<stdio.h>
+int main ( )
+{
+	char name [50];
+	int age;
+	double cgpa;
+	printf ("Enter name, age and CGPA:");
+	scanf ("%s %d %lf" , name, &age, &cgpa);
+	 
+	printf ("Mr. %s, you are %d years old and your CGPAis %4.2lf. Good Luck! \ n" , name, age, cgpa);
+	
+	return 0;
+}
+****************************************************************
+****************************************************************
+//  scanf usage
+
+#include<stdio.h>
+int main()
+
+{  
+	int os,sp;
+	printf ("Enter marks in OS and SP: ");
+	scanf ("%d %d", &os ,&sp );
+	int dld ;
+	printf("Enter marks in DLD: ");
+	scanf("%d",& dld );
+	printf  ("os = %d \nsp= %d \ndld=%d \n",os,sp,dld);
+	return 0;  
+}
+
+****************************************************************
+****************************************************************
+/* scanf usage (error handle) */  
+
+# include<stdio.h>
+int main ( ) 
+{
+	int age;
+	printf ("Enter your age:");
+	scanf ( "%d", &age);
+	char ch;
+	scanf ( "%c" , &ch) ; //will read \n character in buffer
+	char name [50];
+	printf ("Enter name:");
+	scanf ( "%[^\n]s" , name) ;
+	printf ("Mr. %s your age is %d \n" , name, age);
+	return 0; 
+}
+
+****************************************************************
+****************************************************************
+
+
+# include<stdio.h>
+int main ( ) 
+{
+	int a;
+	a=getchar(); /* read single char and return its ASCII decimal val in int*/
+	printf("a = %d \n",a);	
+        a = putchar(a);
+        printf("\na = %d \n",a); /*  convert int( decimal ASCII )  to its char and display on screen
+	                                   and also return this int */
+	return 0;	
+}
+
+
+****************************************************************
+****************************************************************
+//read line using putchar
+
+#include<stdio.h>
+int main()
+{
+    int ch;
+    while( (ch=getchar()) !='\n' )
+    {
+         putchar(ch);
+    }
+	 
+	 return 0;
+}
+
+****************************************************************
+****************************************************************
+//   putchar
+
+/*  read one line from buffer till \n (enter) and dislay it and prompt for another line until press EOF = Ctrl+D   */
+#include<stdio.h>
+int main()
+{
+    int ch;
+    while( (ch=getchar()) != EOF )
+    {
+        putchar(ch);
+    }
+	 
+	return 0;
+}
+
+****************************************************************
+****************************************************************
+// get and put
+
+#include<stdio.h>
+int main()
+{
+     
+    int i; 
+	
+    i= getchar();
+    printf("i= %d",i);
+    printf("\n");
+    putchar(i);
+    return 0;
+}
+
+
+
+
+****************************************************************
+****************************************************************
+
+ /*Program shows a way of reading a string in some variable by
+storing it in an array for later use*/
+
+# include<stdio.h>
+int main()
+ {
+	char buffer[100];
+	int i=0;
+	while ( (buffer[i++] = getchar() ) != '\n');
+	buffer[--i]= '\0';  // for replacing '\n' with '\0' at this position
+	 
+	printf ( "%s" , buffer) ;
+	return 0;
+
+}    
+
+****************************************************************
+****************************************************************
+
+ /*Program shows a way of reading a string in some variable by
+  storing it in an array for later use*/
+
+# include<stdio.h>
+int main()
+ {
+	char buffer[100];
+	int i=0;
+	while ( (buffer[i++] = getchar() ) != '\n');
+	buffer[--i]= '\0';  // for replacing '\n' with '\0' at this position
+ 	printf ( "%s\n" , buffer) ;
+	
+	int n= atoi (buffer);
+	printf ("%d \n",++n);
+	return 0;
+
+}    
+

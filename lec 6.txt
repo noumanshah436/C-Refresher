@@ -1,0 +1,283 @@
+ 
+# include<stdio.h>
+int main()
+ {
+	int i=54; 
+	int * ptr = &i;
+	printf ("value of i is %d\n", i);
+	printf  ("value of &i is %p \n",&i); 
+	printf  ("value of ptr is %p  \n", ptr );
+	printf  ("value of &ptr is %p \n",&ptr ); 
+        printf("size of ptr %ld \n", sizeof(ptr));
+	if(ptr)   // or   if(ptr!=NULL)
+        {
+    	printf("ptr is not null" );
+	}
+	else
+	{
+		printf("ptr is null");
+	}
+}    
+
+
+************************************************************
+************************************************************
+ 
+# include<stdio.h>
+int main()
+ {
+	int i=54; 
+	int * ptr = &i;
+	printf ("value of i is %d\n", i);
+ 	printf  ("value of ptr is %p  \n", ptr );
+ 	printf  ("value of ptr++ is %p \n",ptr++); ptr = &i;
+	printf  ("value of ptr++ is %p \n",++ptr); ptr = &i;
+	printf  ("value of ptr-- is %p \n",ptr--); ptr = &i;
+        printf  ("value of --ptr is %p \n",--ptr); ptr = &i;
+ 
+}    
+
+
+************************************************************
+************************************************************
+//  1D array and pointers
+# include<stdio.h>
+int main()
+ {
+	int arr[5] ={1,2,3,4,5};
+	int i=0;
+	printf("Using array name and superscript \n");
+	for( i;i<5;i++)
+	{
+	printf("%d ",arr[i]);
+	}
+        printf("\nUsing array name and superscript \n");
+	i=0;
+	for( i;i<5;i++)
+	{
+	printf ("%d ",*( arr+i ));
+	}
+	
+	 
+	
+	printf("\nUsing pointer and superscript \n");
+        int * ptr= arr;
+        i=0;
+	for( i;i<5;i++)
+	{
+	printf("%d ",ptr[i]);
+	}
+	
+	printf("\nUsing pointer and Arithmetic \n");
+	i=0;
+	for( i;i<5;i++)
+	{
+	printf ("%d ",*( ptr+i ));
+	}
+}    
+
+
+
+************************************************************
+************************************************************
+// 2D array and pointers
+
+ # include<stdio.h>
+int main ( ) 
+{
+	int matrix [4][3]={1,2,3,4,5,6,7,8,9,10,11,12};
+	printf ("Using array name and subscript \n");
+        int i=0;
+	for ( i;i<4;i++)
+	{
+		int j=0;
+		for (j;j<3;j++)
+		{
+			printf("%d  ",matrix[i][j]);
+ 		}
+ 	        printf("\n");
+	}
+
+ 
+	printf ("\nUsing array name and pointer arithmetic \n") ;
+	i=0;
+	for ( i;i<4;i++)
+	{
+		int j=0;
+		for (j;j<3;j++)
+		{
+			printf("%d  ", *(*(matrix+i)+j) );  
+ 		}
+ 	    printf("\n");
+	}
+	
+	
+	
+	printf ("\nUsing pointer and subscript \n");
+         int (*ptr)[3]=matrix;
+	  i=0;
+	for ( i;i<4;i++)
+	{
+		int j=0;
+		for (j;j<3;j++)
+		{
+			printf("%d  ",ptr[i][j]);
+ 		}
+ 	    printf("\n");
+	}
+
+ 
+	printf ("\nUsing pointer and pointer arithmetic \n") ;
+	i=0;
+	for ( i;i<4;i++)
+	{
+		int j=0;
+		for (j;j<3;j++)
+		{
+			printf("%d  ", *(*(ptr+i)+j) );  
+ 		}
+ 	    printf("\n");
+	}
+	return 0;
+}
+************************************************************
+************************************************************
+
+
+/* input and output using unformatted functions */
+
+# include<stdio.h>
+int main ( ) 
+{ 
+	char name1[]=" Arif Butt";
+	char name2[50];
+	
+	//  input
+	int i=0;
+	while((name2[i++]= getchar()) != '\n' );
+	name2[--i]= '\0'; //  to replace \n with \0
+	
+	//  output
+	i=0;
+	while(name2[i] != '\0')
+	{
+		putc(name2[i++],stdout); //or	putchar(name2[i++]);
+	}
+	putc ('\n',stdout);  // or  putchar ('\n');
+	
+	
+	printf("by\n");
+	return 0;
+}
+
+
+
+************************************************************
+************************************************************
+
+
+/* input and output using unformatted funcctions */
+
+# include<stdio.h>
+int main ( ) 
+{ 
+	char name1[]=" Arif Butt";
+	char name2[50];
+	
+	//  diff ways of input a string  *****************************
+	
+  	//scanf ("%s",name2);   //1
+  	
+      //scanf ("%[^\n]s",name2);   //2
+    
+      // fgets (name,sizeof (name2), stdin );  /* 3) also replace \n with \0*/
+    
+	int i=0;    //4 
+	while((name2[i++]= getchar()) != '\n' );
+	name2[--i]= '\0'; //  to replace \n with \0
+	
+	
+	//  diff ways of output a string   *****************************
+/*
+printf
+puts
+putchar
+printf(char by char)
+putc
+*/
+
+	
+	
+//	printf ("%s",name2);  // 1
+//	puts(name2);          // 2 
+	
+
+ 
+//	i=0;   // 3
+//	while(name2[i] != '\0')
+//	{
+//	    putchar(name2[i++]);
+//  }
+//	putchar('\n');
+	
+	
+	
+//    i=0;   // 4
+//	while(name2[i] != '\0')
+//	{
+//		printf("%c",name2[i++]);
+// 		 
+//  	}
+//	printf("\n");
+	
+	
+	i=0;    // 5
+	while(name2[i] != '\0')
+	{
+		putc(name2[ i++], stdout );
+	}
+        putc ('\n', stdout );
+     
+     
+	printf("by\n");
+	return 0;
+}
+
+
+************************************************************
+************************************************************
+
+# include<stdio.h>
+# include<string.h>
+int main ( ) 
+{
+	// char* names[3];
+	char names [3][30]; 
+	char * q;
+	printf ("Enter three names:\n");
+	int i=0;
+	for (i;i<3;i++)
+	{
+		fgets(names[i] , 30, stdin);
+		if( (q=strchr(names[i],'\n'))  != '\0') 
+		{
+			*q='\0';
+		}
+	}
+	
+	printf ("\nThe three names entered are:\n");
+	i=0;
+	for(i;i<3;i++)
+	{
+	 	printf("%s",names[i]);
+	 	printf("T%c",'\n');// checking
+	}
+	
+	return 0;
+}
+
+
+************************************************************
+************************************************************
+************************************************************
+************************************************************

@@ -1,0 +1,253 @@
+#include<stdio.h>
+
+void func(int );
+
+int main()
+{
+ //	func(56);
+ 
+    void (*fptr)(int)=NULL;
+    fptr= &func;  //  or    fptr=func;
+    
+    (*fptr)(60);  //  or    fptr(65); 
+	return 0;
+}
+
+void func(int a)
+{
+	printf("num passed = %d",a);
+}
+
+
+************************************************************************
+************************************************************************
+
+#include<stdio.h>
+int sum(int, int );
+int main()
+{
+	int (*fptr)(int,int) = NULL ;
+	fptr= &sum;   
+	
+	int result= (*fptr)(60,20);   
+	printf("sum = %d",result);
+	
+	return 0;
+}
+
+int sum(int a , int b)
+{
+	return a+b;
+}
+
+
+************************************************************************
+************************************************************************
+//   simple add , sub and mul using functions
+
+#include<stdio.h>
+int sum(int, int );
+
+int add(int a,int b);
+int sub(int a,int b);
+int mul(int a,int b);
+ 
+int main()
+{
+	int n1=60 , n2=10 ;
+	
+        int rv1 = add(n1,n2);
+	printf ("%d + %d = %d\n",n1,n2,rv1);
+	
+	int rv2 =  sub( n1,n2 );
+	printf ("%d - %d = %d\n",n1,n2,rv2);
+	
+	int rv3 =   mul(n1,n2 );
+	printf ("%d * %d = %d\n",n1,n2,rv3);
+	
+	return 0;
+}
+
+int add(int a,int b){return a+b;}
+int sub(int a,int b){return a-b;}    
+int mul(int a,int b){return a*b;} 
+  
+
+
+************************************************************************
+************************************************************************
+
+//  passing function pointer as an argument
+//   modifying above code 
+
+//   compute func takes the function pointer and call that
+//   function using function pointer
+
+#include<stdio.h>
+ 
+int add(int a,int b);
+int sub(int a,int b);
+int mul(int a,int b);
+int compute(  int(*fptr)(int,int) , int , int  );
+
+int main()
+{
+	int n1=60 , n2=10 ;
+	
+        int rv1 = compute( add,n1,n2 );
+	printf ("%d + %d = %d\n",n1,n2,rv1);
+	
+	int rv2 = compute( sub,n1,n2 );
+	printf ("%d - %d = %d\n",n1,n2,rv2);
+	
+	int rv3 = compute( mul,n1,n2 );
+	printf ("%d * %d = %d\n",n1,n2,rv3);
+	
+	return 0;
+}
+
+int add(int a,int b){return a+b;}
+int sub(int a,int b){return a-b;}    
+int mul(int a,int b){return a*b;} 
+ 
+int compute(  int(*fptr)(int,int) , int a, int b )
+{
+	int rv = (*fptr)(a,b);
+	return rv;
+}
+
+************************************************************************
+************************************************************************
+
+//  Array of function Pointers
+
+// in this program aray of function pointer saves pointer 
+// to add , sub and mul functions
+// and we will cal compute using this array element
+
+#include<stdio.h>
+ 
+int add(int a,int b);
+int sub(int a,int b);
+int mul(int a,int b);
+int compute( int(*fptr)(int,int) , int , int  );
+
+int main()
+{
+	int a=15, b=10;  
+//	int(*fptr_arr[3])(int, int)={add , sub , mul};
+
+	int(*fptr_arr[3])(int, int);
+	fptr_arr[0] = add;
+	fptr_arr[1] = sub;
+	fptr_arr[2] = mul;
+	
+	int num;
+	printf("1 for add \n2 for sub \n3 for mul\n");
+	printf("Enter Your Choice: ");
+	scanf("%d",&num);
+
+	if(num==1)
+	{
+		int rv1 =compute(fptr_arr[num-1],a,b);
+		printf ("%d + %d = %d\n",a,b,rv1);
+	}
+	else if(num == 2)
+	{
+		int rv2= compute(fptr_arr[num-1],a,b);
+		printf ("%d - %d = %d\n",a,b,rv2);
+	}
+	else if(num == 3)
+	{
+		int rv3= compute(fptr_arr[num-1],a,b);
+		printf ("%d * %d = %d\n",a,b,rv3);
+	}
+        else 
+	{
+		printf ("Enter Correct Option\n");
+	}
+
+        return 0;
+}
+
+int add(int a,int b){return a+b;}
+int sub(int a,int b){return a-b;}    
+int mul(int a,int b){return a*b;} 
+ 
+int compute(  int(*fptr)(int,int) , int a, int b )
+{
+	int rv = (*fptr)(a,b);
+	return rv;
+}
+
+
+
+************************************************************************
+************************************************************************
+
+//  program using qsort() to sort an array of integers in ascending or descending order
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int  mySort( const void * , const void * );  
+
+int main()
+{
+	int arr[]={12,4,40,35,1};
+	qsort(arr, 5, sizeof(int) , mySort);
+	int i=0;
+	 for(i;i<5;i++)
+	 {
+	 	printf("%d ",arr[i]);
+	 }
+ 
+	return 0;
+}
+
+int  mySort(  const void * x , const void * y )
+{
+     return  *(int*)x - *(int*)y ;    //  for ascending order
+//   return  *(int*)y - *(int*)x ;    //  for descending order
+    
+//   x and y first cast to int *  and then dereferenced
+
+}
+
+************************************************************************
+************************************************************************
+//  program using qsort() to sort an array of characters of string
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int  mySort( const void * , const void * );  
+
+int main()
+{
+	char* names[5]={ "Nouman", "Zeeshan", "Ramzan","Asif" , "Khadim" };
+	
+	qsort(names, 5, sizeof(char*) , mySort);
+	int i=0;
+	 for(i;i<5;i++)
+	 {
+	 	printf("%s ",names[i]);
+	 }
+ 
+	return 0;
+}
+
+int  mySort(  const void * x , const void * y )
+{
+//    return strcmp( *(char*const*)x  ,  *(char*const *)y ); //  for ascending
+//    return strcmp( *(char*const*)y  ,  *(char*const *)x ); //  for descending  
+
+//  or without const
+
+//	return strcmp( *(char* *)x  ,  *(char*  *)y ); //  for ascending
+    return strcmp( *(char* *)y  ,  *(char*  *)x ); //  for descending 
+}
+
+************************************************************************
+************************************************************************

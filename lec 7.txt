@@ -1,0 +1,198 @@
+# include<stdio.h>
+
+void swap(int * const p1, int * const p2);
+int main()
+{
+	int a=5;
+	int b=10;
+	swap(&a,&b);
+	printf("a=%d\nb=%d",a,b);
+    return 0;
+}
+void swap(int * const p1, int * const p2)
+{
+	int temp = *p1;
+	 *p1 =  *p2;
+	 *p2=temp;
+}
+
+************************************************************** 
+************************************************************** 
+
+//  Passing a 1D array to Function 
+//  slide 16
+# include<stdio.h>
+
+void print1(int arr[],  const int size );
+void print2(int * ptr,  const int size );
+
+int main()
+{
+	int a[]= {1,2,3,4,5};
+	printf("Printing 1D array using array notation:\n" );
+	print1(a,5);
+	printf("Printing 1D array using pointer notation:\n" );
+	print2(a,5);
+	return 0;
+}
+void print2(int * ptr,  const int size )
+{
+	int i=0;
+	for(i ; i<size ; i++)
+	{
+		//printf("%d ",ptr[i]);   // or
+		printf("%d ", *(ptr+i) );
+	}
+	printf("\n");
+}
+void print1(int arr[],  const int size )
+{
+	int i=0;
+	for(i ; i<size ; i++)
+	{
+		printf("%d ",arr[i]);
+	}
+	printf("\n");
+}
+
+************************************************************** 
+************************************************************** 
+
+//Passing 2D array to a function
+// slide 22
+
+# include<stdio.h>
+
+void print1(  int[][3], const int );         /*Passing 2D array using array notation*/
+void print2( int (*)[3], const int );       /* Passing 2D array using pointer to an array*/
+void print3( int *, const int, const int);  /* Passing 2D array using pointer to int*/
+
+int main()
+{ 
+	
+	//int arr [4][3]={1,2,3,4,5,6,7,8,9,10,11,12};
+	int arr [][3]={1,2,3,4,5,6,7,8,9,10,11,12};
+	
+	printf("Passing 2D array using array notation:\n");
+	print1(arr,4);
+	
+	printf ("\nPassing 2D array using pointer to an array:\n");
+	print2(arr,4);
+
+	printf("\nPassing 2D array using pointer to int :\n");  
+	print3(&arr[0][0],4,3); 
+	 
+	return 0;
+}
+
+void print1( int arr[][3], const int rows)
+{ 
+	int i=0;
+	for( i;i<rows;i++)
+	{
+		int j=0;
+		for( j ; j<3 ; j++)
+		{
+			printf("%d \t",arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
+void print2( int (*arr)[3], const int rows)
+{ 
+	int i=0;
+	for( i;i<rows;i++)
+	{
+		int j=0;
+		for( j ; j<3 ; j++)
+		{
+			printf("%d \t",arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+void print3( int * arr, const int rows, const int cols)
+{
+	 int i=0;
+	for( i;i<rows;i++)
+	{
+		int j=0;
+		for( j ; j<cols ; j++)
+		{
+			printf("%d \t",*(arr+(i*cols)+j)); // cannot use double script operator here
+		}
+		printf("\n");
+	}
+}
+
+************************************************************** 
+************************************************************** 
+//Passing an array of character to a function
+
+
+# include<stdio.h>
+void print1(char a[]);
+ 
+int main()
+{ 
+    char s[]="Nouman";
+	print1(&s);
+	
+	//printf(&s);
+	//printf(s);
+	return 0;
+}
+
+void print1(char a[])
+{
+	int i=0;
+	for(i;a[i]!='\0';i++)
+	{
+		printf("%c",a[i]);
+	}
+	printf("%c",'S');
+	 
+}
+
+************************************************************** 
+************************************************************** 
+
+//Passing an array of character of Strings to a function
+// slide 27
+
+# include<stdio.h>
+void print(char * [] , const int);
+
+
+int main()
+{ 
+    char * names[3] ={"Nouman","Ali","Hammad"};
+    print(names,3);
+    return 0;
+}
+
+void print(char * names[] , const int count)
+{
+	int i=0;
+	for(i;i<count;i++)
+	{
+		printf("%s\n",names[i]);
+	}
+	 
+}
+
+
+
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
+************************************************************** 
